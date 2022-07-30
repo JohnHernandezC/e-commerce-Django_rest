@@ -66,7 +66,7 @@ class Product(BaseModel):
     
     name = models.CharField(max_length=150, blank=False, unique=True, null=False)
     description= models.TextField(blank=False, unique=True, null=False)
-    image = models.ImageField( upload_to='products/', blank=True, null=True, default=None)
+    image = models.CharField( blank=True, null=True,  max_length=1000)
     MeasureUnit= models.ForeignKey(MeasureUnit, on_delete=models.CASCADE, null=True )
     categoryProduc= models.ForeignKey(CategoryProduct, on_delete=models.CASCADE, null=True )    
     historical= HistoricalRecords()

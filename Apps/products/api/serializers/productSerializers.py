@@ -21,14 +21,11 @@ class ProductSerializer(serializers.ModelSerializer):
             'id': instance.id,
             'name': instance.name,
             'description': instance.description,
-            'image': instance.image if instance.image !='' else '',
-            'MeasureUnit': instance.MeasureUnit.description,
-            'categoryProduc': instance.categoryProduc.description
+            'image': instance.image or "",
+            'MeasureUnit': instance.MeasureUnit.description if instance.MeasureUnit is not None else '',
+            'categoryProduc': instance.categoryProduc.description if instance.categoryProduc is not None else '',
         }
-    def create(self, validated_data):
-        if validated_data['image'] == None:
-            validated_data['image'] = ''
-        return Product.objects.create(**validated_data)
+    
     
     #inmueblesList= serializers.PrimaryKeyRelatedField(many=True)#solo nos devuelve los id
     #inmueblesList= serializers.StringRelatedField(many=True)#solo nos devuelve lo que este en el str del modelo
